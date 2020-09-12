@@ -1,0 +1,7 @@
+generates:
+  ./graphql/codegen/generated.ts:
+    documents: ./graphql/codegen/queries/**/*.{gql,graphql}
+    schema: api.graphql
+    plugins:
+      - typescript
+      - typescript-operations
