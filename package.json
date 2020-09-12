@@ -9,7 +9,7 @@
     "db:migrate": "prisma migrate save --experimental && prisma migrate up --experimental",
     "nexus:reflection": "nexus dev --reflection --entrypoint pages/api/graphql.ts",
     "nexus:check": "nexus build --entrypoint pages/api/graphql.ts",
-    "test": "nexus build",
+    "test": "jest",
     "dev": "next dev",
     "start": "next start",
     "build": "nexus build && next build",
@@ -36,7 +36,9 @@
     "@prisma-labs/prettier-config": "0.1.0",
     "@types/node": "13.13.10",
     "@types/react": "16.9.34",
+    "jest": "^26.4.2",
     "prettier": "2.0.5",
+    "ts-jest": "^26.3.0",
     "typescript": "3.9.6"
   },
   "prettier": "@prisma-labs/prettier-config"
