@@ -1,5 +1,5 @@
-schema: "./api.graphql"
-documents: "**/*.{graphql,js,ts,jsx,tsx}"
+schema: './api.graphql'
+documents: '**/*.{graphql,js,ts,jsx,tsx}'
 extensions:
   endpoints:
-    default: "http://localhost:3000/api/graphql"
+    default: 'http://localhost:3000/api/graphql'

@@ -59,42 +59,42 @@ export type TodoWhereUniqueInput = {
   id?: Maybe<Scalars['Int']>;
 };
 
-export type FirstQueryQueryVariables = Exact<{ [key: string]: never; }>;
+export type MyQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FirstQueryQuery = (
+export type MyQueryQuery = (
   { __typename?: 'Query' }
   & Pick<Query, 'prova'>
 );
 
 
-export const FirstQueryDocument = gql`
-    query FirstQuery {
+export const MyQueryDocument = gql`
+    query MyQuery {
   prova
 }
     `;
 
 /**
- * __useFirstQueryQuery__
+ * __useMyQueryQuery__
  *
- * To run a query within a React component, call `useFirstQueryQuery` and pass it any options that fit your needs.
- * When your component renders, `useFirstQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useMyQueryQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMyQueryQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useFirstQueryQuery({
+ * const { data, loading, error } = useMyQueryQuery({
  *   variables: {
  *   },
  * });
  */
-export function useFirstQueryQuery(baseOptions?: Apollo.QueryHookOptions<FirstQueryQuery, FirstQueryQueryVariables>) {
-        return Apollo.useQuery<FirstQueryQuery, FirstQueryQueryVariables>(FirstQueryDocument, baseOptions);
+export function useMyQueryQuery(baseOptions?: Apollo.QueryHookOptions<MyQueryQuery, MyQueryQueryVariables>) {
+        return Apollo.useQuery<MyQueryQuery, MyQueryQueryVariables>(MyQueryDocument, baseOptions);
       }
-export function useFirstQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FirstQueryQuery, FirstQueryQueryVariables>) {
-          return Apollo.useLazyQuery<FirstQueryQuery, FirstQueryQueryVariables>(FirstQueryDocument, baseOptions);
+export function useMyQueryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MyQueryQuery, MyQueryQueryVariables>) {
+          return Apollo.useLazyQuery<MyQueryQuery, MyQueryQueryVariables>(MyQueryDocument, baseOptions);
         }
-export type FirstQueryQueryHookResult = ReturnType<typeof useFirstQueryQuery>;
-export type FirstQueryLazyQueryHookResult = ReturnType<typeof useFirstQueryLazyQuery>;
-export type FirstQueryQueryResult = Apollo.QueryResult<FirstQueryQuery, FirstQueryQueryVariables>;
+export type MyQueryQueryHookResult = ReturnType<typeof useMyQueryQuery>;
+export type MyQueryLazyQueryHookResult = ReturnType<typeof useMyQueryLazyQuery>;
+export type MyQueryQueryResult = Apollo.QueryResult<MyQueryQuery, MyQueryQueryVariables>;
