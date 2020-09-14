@@ -6,32 +6,34 @@ use(
     features: {
       crud: true,
     },
+    paginationStrategy: 'prisma',
   })
 )
 
 schema.objectType({
-  name: 'Todo',
+  name: 'Post',
   definition(t) {
     t.model.id()
     t.model.description()
+    t.model.title()
+    t.model.userId()
+    t.model.user()
   },
 })
 
 schema.extendType({
   type: 'Query',
   definition(t) {
-    t.crud.todos()
-    t.string('prova', {
-      resolve() {
-        return 'prova'
-      },
-    })
+    t.crud.users()
+    t.crud.user()
+    t.crud.posts()
   },
 })
 
 schema.extendType({
   type: 'Mutation',
   definition(t) {
-    t.crud.createOneTodo()
+    t.crud.createOneUser({})
+    t.crud.createOnePost({})
   },
 })

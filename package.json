@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "db:start": "docker run --detach --publish 5432:5432 -e POSTGRES_PASSWORD=postgres --name 'with-nextjs-and-vercel-and-plugin-prisma' postgres",
-    "db:stop": "docker stop with-nextjs-and-vercel-and-plugin-prisma",
+    "db:start": "docker run --detach --publish 5432:5432 -e POSTGRES_PASSWORD=postgres --name 'next-nexus-todo' postgres",
+    "db:stop": "docker stop next-nexus-todo",
     "generate": "graphql-codegen",
     "db:migrate": "prisma migrate save --experimental && prisma migrate up --experimental",
     "nexus:reflection": "nexus dev --reflection --entrypoint src/pages/api/graphql.ts",
@@ -18,13 +18,22 @@
   },
   "dependencies": {
     "@apollo/client": "^3.1.5",
+    "@apollo/react-hooks": "^4.0.0",
+    "@chakra-ui/core": "^0.8.0",
+    "@emotion/core": "^10.0.35",
+    "@emotion/styled": "^10.0.27",
+    "apollo-boost": "^0.4.9",
+    "emotion-theming": "^10.0.27",
+    "graphql-fields": "^2.0.3",
     "isomorphic-unfetch": "^3.0.0",
     "next": "^9.5.0",
+    "next-with-apollo": "^5.1.0",
     "nexus": "0.26.1",
     "nexus-plugin-prisma": "0.18.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-is": "^16.13.1"
+    "react-is": "^16.13.1",
+    "urql": "^1.10.1"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^1.17.8",

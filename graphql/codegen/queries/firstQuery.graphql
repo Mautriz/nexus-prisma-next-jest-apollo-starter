@@ -1,5 +1,9 @@
 query MyQuery {
-  todos {
-    description
+  first {
+    second {
+      shird {
+        fourth
+      }
+    }
   }
 }

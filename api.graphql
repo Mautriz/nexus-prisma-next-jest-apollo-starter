@@ -15,23 +15,74 @@ The `JSON` scalar type represents JSON objects as specified by [ECMA-404](http:/
 scalar Json
 
 type Mutation {
-  createOneTodo(data: TodoCreateInput!): Todo!
+  createOnePost(data: PostCreateInput!): Post!
+  createOneUser(data: UserCreateInput!): User!
+}
+
+type PageInfo {
+  total: Int
+}
+
+type Post {
+  description: String
+  id: Int!
+  title: String!
+  user: User!
+  userId: Int!
+}
+
+type PostConnection {
+  nodes: [Post!]
+  pageInfo: PageInfo
+}
+
+input PostCreateInput {
+  description: String
+  title: String!
+  user: UserCreateOneWithoutPostsInput!
+}
+
+input PostCreateManyWithoutUserInput {
+  connect: [PostWhereUniqueInput!]
+  create: [PostCreateWithoutUserInput!]
+}
+
+input PostCreateWithoutUserInput {
+  description: String
+  title: String!
+}
+
+input PostWhereUniqueInput {
+  id: Int
 }
 
 type Query {
-  prova: String
-  todos(after: TodoWhereUniqueInput, before: TodoWhereUniqueInput, first: Int, last: Int): [Todo!]!
+  customUser(where: UserWhereUniqueInput!): User
+  posts(after: PostWhereUniqueInput, before: PostWhereUniqueInput, first: Int, last: Int): [Post!]!
+  users(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int): [User!]!
 }
 
-type Todo {
-  description: String!
+type User {
   id: Int!
+  postConnection(after: PostWhereUniqueInput, before: PostWhereUniqueInput, first: Int, last: Int): [PostConnection!]!
+  username: String!
 }
 
-input TodoCreateInput {
-  description: String!
+input UserCreateInput {
+  posts: PostCreateManyWithoutUserInput
+  username: String!
 }
 
-input TodoWhereUniqueInput {
+input UserCreateOneWithoutPostsInput {
+  connect: UserWhereUniqueInput
+  create: UserCreateWithoutPostsInput
+}
+
+input UserCreateWithoutPostsInput {
+  username: String!
+}
+
+input UserWhereUniqueInput {
   id: Int
+  username: String
 }
