@@ -1,22 +1,8 @@
 import Head from 'next/head'
 import Layout from '../components/layout'
-import { useQuery } from 'urql'
+import { withCustomApollo } from '../utils/withApollo'
 
-export default function Home() {
-  const [res, refetch] = useQuery({
-    query: /* graphql */ `
-  query MyQuery {
-    first {
-      second {
-        shird {
-          fourth
-        }
-      }
-    }
-  }
-  `,
-  })
-  console.log(res)
+function Home() {
   return (
     <Layout>
       <Head>
@@ -26,3 +12,5 @@ export default function Home() {
     </Layout>
   )
 }
+
+export default withCustomApollo(Home, {})

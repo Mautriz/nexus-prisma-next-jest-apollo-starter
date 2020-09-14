@@ -16,24 +16,22 @@ scalar Json
 
 type Mutation {
   createOnePost(data: PostCreateInput!): Post!
-  createOneUser(data: UserCreateInput!): User!
 }
 
-type PageInfo {
-  total: Int
-}
+"""
+
+    This scalar should never make it into production. It is used as a placeholder for situations
+    where GraphQL Nexus encounters a missing type. We don't want to error immedately, otherwise
+    the TypeScript definitions will not be updated.
+  
+"""
+scalar NEXUS__UNKNOWN__TYPE
 
 type Post {
   description: String
   id: Int!
   title: String!
-  user: User!
   userId: Int!
-}
-
-type PostConnection {
-  nodes: [Post!]
-  pageInfo: PageInfo
 }
 
 input PostCreateInput {
@@ -42,47 +40,19 @@ input PostCreateInput {
   user: UserCreateOneWithoutPostsInput!
 }
 
-input PostCreateManyWithoutUserInput {
-  connect: [PostWhereUniqueInput!]
-  create: [PostCreateWithoutUserInput!]
-}
-
-input PostCreateWithoutUserInput {
-  description: String
-  title: String!
-}
-
 input PostWhereUniqueInput {
   id: Int
 }
 
 type Query {
-  customUser(where: UserWhereUniqueInput!): User
-  posts(after: PostWhereUniqueInput, before: PostWhereUniqueInput, first: Int, last: Int): [Post!]!
-  users(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int): [User!]!
-}
-
-type User {
-  id: Int!
-  postConnection(after: PostWhereUniqueInput, before: PostWhereUniqueInput, first: Int, last: Int): [PostConnection!]!
-  username: String!
-}
-
-input UserCreateInput {
-  posts: PostCreateManyWithoutUserInput
-  username: String!
+  posts(cursor: PostWhereUniqueInput, skip: Int, take: Int): [Post!]!
 }
 
 input UserCreateOneWithoutPostsInput {
-  connect: UserWhereUniqueInput
+  connect: NEXUS__UNKNOWN__TYPE
   create: UserCreateWithoutPostsInput
 }
 
 input UserCreateWithoutPostsInput {
   username: String!
-}
-
-input UserWhereUniqueInput {
-  id: Int
-  username: String
 }
