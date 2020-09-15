@@ -2,6 +2,10 @@
 ### Do not make changes to this file directly
 
 
+type Ciao {
+  helloWorld: String
+}
+
 """
 A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the
 `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO
@@ -15,29 +19,25 @@ The `JSON` scalar type represents JSON objects as specified by [ECMA-404](http:/
 scalar Json
 
 type Mutation {
-  createOnePost(data: PostCreateInput!): Post!
+  createOneUser(data: UserCreateInput!): User!
 }
-
-"""
-
-    This scalar should never make it into production. It is used as a placeholder for situations
-    where GraphQL Nexus encounters a missing type. We don't want to error immedately, otherwise
-    the TypeScript definitions will not be updated.
-  
-"""
-scalar NEXUS__UNKNOWN__TYPE
 
 type Post {
   description: String
   id: Int!
   title: String!
+  user: User!
   userId: Int!
 }
 
-input PostCreateInput {
+input PostCreateManyWithoutUserInput {
+  connect: [PostWhereUniqueInput!]
+  create: [PostCreateWithoutUserInput!]
+}
+
+input PostCreateWithoutUserInput {
   description: String
   title: String!
-  user: UserCreateOneWithoutPostsInput!
 }
 
 input PostWhereUniqueInput {
@@ -45,14 +45,25 @@ input PostWhereUniqueInput {
 }
 
 type Query {
+  ciao: Ciao
+  post(where: PostWhereUniqueInput!): Post
   posts(cursor: PostWhereUniqueInput, skip: Int, take: Int): [Post!]!
+  user(where: UserWhereUniqueInput!): User
+  users(cursor: UserWhereUniqueInput, skip: Int, take: Int): [User!]!
 }
 
-input UserCreateOneWithoutPostsInput {
-  connect: NEXUS__UNKNOWN__TYPE
-  create: UserCreateWithoutPostsInput
-}
-
-input UserCreateWithoutPostsInput {
+type User {
+  id: Int!
+  posts(cursor: PostWhereUniqueInput, skip: Int, take: Int): [Post!]!
   username: String!
+}
+
+input UserCreateInput {
+  posts: PostCreateManyWithoutUserInput
+  username: String!
+}
+
+input UserWhereUniqueInput {
+  id: Int
+  username: String
 }

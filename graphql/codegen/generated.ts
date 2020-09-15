@@ -19,44 +19,101 @@ export type Scalars = {
   Json: any;
 };
 
+export type Ciao = {
+  __typename?: 'Ciao';
+  helloWorld?: Maybe<Scalars['String']>;
+};
+
 
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createOneTodo: Todo;
+  createOneUser: User;
 };
 
 
-export type MutationCreateOneTodoArgs = {
-  data: TodoCreateInput;
+export type MutationCreateOneUserArgs = {
+  data: UserCreateInput;
+};
+
+export type Post = {
+  __typename?: 'Post';
+  description?: Maybe<Scalars['String']>;
+  id: Scalars['Int'];
+  title: Scalars['String'];
+  user: User;
+  userId: Scalars['Int'];
+};
+
+export type PostCreateManyWithoutUserInput = {
+  connect?: Maybe<Array<PostWhereUniqueInput>>;
+  create?: Maybe<Array<PostCreateWithoutUserInput>>;
+};
+
+export type PostCreateWithoutUserInput = {
+  description?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
+};
+
+export type PostWhereUniqueInput = {
+  id?: Maybe<Scalars['Int']>;
 };
 
 export type Query = {
   __typename?: 'Query';
-  prova?: Maybe<Scalars['String']>;
-  todos: Array<Todo>;
+  ciao?: Maybe<Ciao>;
+  post?: Maybe<Post>;
+  posts: Array<Post>;
+  user?: Maybe<User>;
+  users: Array<User>;
 };
 
 
-export type QueryTodosArgs = {
-  after?: Maybe<TodoWhereUniqueInput>;
-  before?: Maybe<TodoWhereUniqueInput>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+export type QueryPostArgs = {
+  where: PostWhereUniqueInput;
 };
 
-export type Todo = {
-  __typename?: 'Todo';
-  description: Scalars['String'];
+
+export type QueryPostsArgs = {
+  cursor?: Maybe<PostWhereUniqueInput>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryUserArgs = {
+  where: UserWhereUniqueInput;
+};
+
+
+export type QueryUsersArgs = {
+  cursor?: Maybe<UserWhereUniqueInput>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
+};
+
+export type User = {
+  __typename?: 'User';
   id: Scalars['Int'];
+  posts: Array<Post>;
+  username: Scalars['String'];
 };
 
-export type TodoCreateInput = {
-  description: Scalars['String'];
+
+export type UserPostsArgs = {
+  cursor?: Maybe<PostWhereUniqueInput>;
+  skip?: Maybe<Scalars['Int']>;
+  take?: Maybe<Scalars['Int']>;
 };
 
-export type TodoWhereUniqueInput = {
+export type UserCreateInput = {
+  posts?: Maybe<PostCreateManyWithoutUserInput>;
+  username: Scalars['String'];
+};
+
+export type UserWhereUniqueInput = {
   id?: Maybe<Scalars['Int']>;
+  username?: Maybe<Scalars['String']>;
 };
 
 export type MyQueryQueryVariables = Exact<{ [key: string]: never; }>;
@@ -64,13 +121,18 @@ export type MyQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type MyQueryQuery = (
   { __typename?: 'Query' }
-  & Pick<Query, 'prova'>
+  & { ciao?: Maybe<(
+    { __typename?: 'Ciao' }
+    & Pick<Ciao, 'helloWorld'>
+  )> }
 );
 
 
 export const MyQueryDocument = gql`
     query MyQuery {
-  prova
+  ciao {
+    helloWorld
+  }
 }
     `;
 

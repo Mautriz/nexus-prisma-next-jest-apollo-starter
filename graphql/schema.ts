@@ -11,22 +11,32 @@ use(
 )
 
 schema.objectType({
+  name: 'User',
+  definition(t) {
+    t.model.id()
+    t.model.username()
+    t.model.posts()
+  },
+})
+
+schema.objectType({
   name: 'Post',
   definition(t) {
     t.model.id()
     t.model.description()
     t.model.title()
-    t.model.userId()
     t.model.user()
+    t.model.userId()
   },
 })
 
 schema.extendType({
   type: 'Query',
   definition(t) {
-    t.crud.users()
     t.crud.user()
+    t.crud.post()
     t.crud.posts()
+    t.crud.users()
   },
 })
 
@@ -34,6 +44,47 @@ schema.extendType({
   type: 'Mutation',
   definition(t) {
     t.crud.createOneUser({})
-    t.crud.createOnePost({})
   },
 })
+
+schema.objectType({
+  name: 'Ciao',
+  definition(t) {
+    t.string('helloWorld')
+  },
+})
+
+let n = 0
+
+schema.queryType({
+  definition(t) {
+    t.field('ciao', {
+      type: 'Ciao',
+      resolve(root, args, ctx, info) {
+        console.log(n++)
+        return { helloWorld: 'ciao' }
+      },
+    })
+  },
+})
+
+schema.mutationType({
+  definition(t) {
+    t.boolean('createShit', {
+      resolve() {
+        return true
+      },
+    })
+  },
+})
+
+// schema.extendType({
+//   type: 'Subscription',
+//   definition(t) {
+//     t.field('ciao', {
+//       resolve() {
+//         return ''
+//       }
+//     })
+//   }
+// })

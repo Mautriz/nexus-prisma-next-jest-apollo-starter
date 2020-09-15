@@ -1,11 +1,15 @@
-// lib/withApollo.js
+import withApollo from 'next-with-apollo'
+import ApolloClient, { InMemoryCache } from 'apollo-boost'
 import { ApolloProvider } from '@apollo/react-hooks'
-import { initApolloClient } from './CreateClient'
-import { withApollo } from 'next-with-apollo'
+
+const SERVER_URL = process.env.SERVER_URL || 'localhost:3000'
 
 export const withCustomApollo = withApollo(
-  ({ initialState, ctx }) => {
-    return initApolloClient(initialState, ctx)
+  ({ initialState }) => {
+    return new ApolloClient({
+      uri: `http://${SERVER_URL}/api/graphql`,
+      cache: new InMemoryCache().restore(initialState || {}),
+    })
   },
   {
     render: ({ Page, props }) => {

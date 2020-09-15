@@ -1,9 +1,5 @@
 query MyQuery {
-  first {
-    second {
-      shird {
-        fourth
-      }
-    }
+  ciao {
+    helloWorld
   }
 }
