@@ -50,10 +50,29 @@ schema.queryType({
     definition(t) {
         t.field('ciao', {
             type: 'Ciao',
-            resolve(...args) {
-                console.log(`I've been called ${n++} times`);
+            resolve(root, args, ctx, info) {
+                console.log(n++);
                 return { helloWorld: 'ciao' };
             },
         });
     },
 });
+schema.mutationType({
+    definition(t) {
+        t.boolean('createShit', {
+            resolve() {
+                return true;
+            },
+        });
+    },
+});
+// schema.extendType({
+//   type: 'Subscription',
+//   definition(t) {
+//     t.field('ciao', {
+//       resolve() {
+//         return ''
+//       }
+//     })
+//   }
+// })

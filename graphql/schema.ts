@@ -1,5 +1,6 @@
 import { schema, use } from 'nexus'
 import { prisma } from 'nexus-plugin-prisma'
+import { prismaClient } from './configs/prismaClient'
 
 use(
   prisma({

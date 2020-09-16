@@ -26,6 +26,7 @@ type Mutation {
   createOneUser(data: UserCreateInput!): User!
   createShit: Boolean
   login(id: Int, password: String, username: String): AccessToken
+  refreshToken: AccessToken
 }
 
 type Post {

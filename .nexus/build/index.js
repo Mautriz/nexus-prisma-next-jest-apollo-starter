@@ -13,5 +13,6 @@ process.once('unhandledRejection', error => {
 });
 // Import the user's Nexus modules
 import './graphql/schema';
+import './graphql/user/resolver';
 app.assemble();
 app.start();
