@@ -9,7 +9,6 @@ app.settings.change({
     connections: {
       default: {
         cursorFromNode(node) {
-          console.log(node)
           return node.id
         },
       },

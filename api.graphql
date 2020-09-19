@@ -49,6 +49,7 @@ input PostCreateWithoutUserInput {
 
 input PostWhereUniqueInput {
   id: Int
+  userId: Int
 }
 
 type Query {
@@ -61,16 +62,21 @@ type Query {
 
 type User {
   id: Int!
+  name: String
   posts(cursor: PostWhereUniqueInput, skip: Int, take: Int): [Post!]!
-  username: String!
 }
 
 input UserCreateInput {
+  createdAt: DateTime
+  email: String
+  emailVerified: DateTime
+  image: String
+  name: String
   posts: PostCreateManyWithoutUserInput
-  username: String!
+  updatedAt: DateTime
 }
 
 input UserWhereUniqueInput {
+  email: String
   id: Int
-  username: String
 }
